@@ -33,6 +33,10 @@ FORMATION_OFFSETS = (
     (-225, -42), (-135, -42), (-45, -42), (45, -42), (135, -42),
 )
 FRAME_PHASE_OFFSETS = (0, 3, 6, 9, 12, 2, 5, 8, 11, 13)
+BIRD_COUNT = 10
+
+assert len(FORMATION_OFFSETS) == BIRD_COUNT
+assert len(FRAME_PHASE_OFFSETS) == BIRD_COUNT
 
 
 def frame_rectangle(frame_index):
@@ -52,7 +56,7 @@ def frame_rectangle(frame_index):
 
 
 class BirdFlock:
-    """A placeholder flock that is filled out in the following commits."""
+    """Keep ten phase-staggered birds together during horizontal flight."""
 
     def __init__(self):
         self.canvas_width = get_canvas_width()
