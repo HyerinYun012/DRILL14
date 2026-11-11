@@ -33,6 +33,22 @@ FORMATION_OFFSETS = (
 FRAME_PHASE_OFFSETS = (0, 3, 6, 9, 12, 2, 5, 8, 11, 13)
 
 
+def frame_rectangle(frame_index):
+    """Return an exact Pico2D clip rectangle for one of the 14 frames."""
+    frame_index %= FLIGHT_FRAME_COUNT
+    row_from_top, column = divmod(frame_index, SPRITE_COLUMNS)
+
+    left = column * SPRITE_SHEET_WIDTH // SPRITE_COLUMNS
+    right = (column + 1) * SPRITE_SHEET_WIDTH // SPRITE_COLUMNS
+    top = row_from_top * SPRITE_SHEET_HEIGHT // SPRITE_ROWS
+    next_top = (row_from_top + 1) * SPRITE_SHEET_HEIGHT // SPRITE_ROWS
+
+    width = right - left
+    height = next_top - top
+    bottom = SPRITE_SHEET_HEIGHT - next_top
+    return left, bottom, width, height
+
+
 class BirdFlock:
     """A placeholder flock that is filled out in the following commits."""
 
