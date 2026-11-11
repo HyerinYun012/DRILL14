@@ -58,10 +58,11 @@ class BirdFlock:
         self.canvas_width = get_canvas_width()
         self.canvas_height = get_canvas_height()
         self.image = load_image('bird_animation.png')
-        horizontal_extent = max(abs(x) for x, _ in FORMATION_OFFSETS)
-        self.left_bound = horizontal_extent + DRAW_WIDTH / 2
+        left_offset = min(x for x, _ in FORMATION_OFFSETS)
+        right_offset = max(x for x, _ in FORMATION_OFFSETS)
+        self.left_bound = DRAW_WIDTH / 2 - left_offset
         self.right_bound = (
-            self.canvas_width - horizontal_extent - DRAW_WIDTH / 2
+            self.canvas_width - DRAW_WIDTH / 2 - right_offset
         )
         self.x = self.left_bound
         self.y = self.canvas_height - 100.0
@@ -93,7 +94,7 @@ class BirdFlock:
                 FORMATION_OFFSETS, FRAME_PHASE_OFFSETS):
             frame_index = int(self.frame + phase) % FLIGHT_FRAME_COUNT
             left, bottom, width, height = frame_rectangle(frame_index)
-            bird_x = self.x + self.direction * offset_x
+            bird_x = self.x + offset_x
             bird_y = self.y + offset_y
 
             self.image.clip_composite_draw(
