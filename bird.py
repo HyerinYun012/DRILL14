@@ -58,7 +58,12 @@ class BirdFlock:
         self.canvas_width = get_canvas_width()
         self.canvas_height = get_canvas_height()
         self.image = load_image('bird_animation.png')
-        self.x = 0.0
+        horizontal_extent = max(abs(x) for x, _ in FORMATION_OFFSETS)
+        self.left_bound = horizontal_extent + DRAW_WIDTH / 2
+        self.right_bound = (
+            self.canvas_width - horizontal_extent - DRAW_WIDTH / 2
+        )
+        self.x = self.left_bound
         self.y = self.canvas_height - 100.0
         self.direction = 1
         self.frame = 0.0
