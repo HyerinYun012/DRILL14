@@ -2,6 +2,8 @@
 
 from pico2d import get_canvas_height, get_canvas_width, load_image
 
+import game_framework
+
 
 # Use the same world scale as the boy: 10 pixels represent 30 cm.
 PIXEL_PER_METER = 10.0 / 0.3
@@ -62,7 +64,10 @@ class BirdFlock:
         self.frame = 0.0
 
     def update(self):
-        pass
+        elapsed = game_framework.frame_time
+        self.frame = (
+            self.frame + FLIGHT_FRAMES_PER_SECOND * elapsed
+        ) % FLIGHT_FRAME_COUNT
 
     def draw(self):
         pass
