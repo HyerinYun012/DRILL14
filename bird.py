@@ -74,6 +74,17 @@ class BirdFlock:
             self.frame + FLIGHT_FRAMES_PER_SECOND * elapsed
         ) % FLIGHT_FRAME_COUNT
         self.x += self.direction * FLY_SPEED_PPS * elapsed
+        self._reflect_at_edges()
+
+    def _reflect_at_edges(self):
+        """Reflect overshoot so a slow frame cannot change flight distance."""
+        while self.x < self.left_bound or self.x > self.right_bound:
+            if self.x > self.right_bound:
+                self.x = 2 * self.right_bound - self.x
+                self.direction = -1
+            elif self.x < self.left_bound:
+                self.x = 2 * self.left_bound - self.x
+                self.direction = 1
 
     def draw(self):
         pass
