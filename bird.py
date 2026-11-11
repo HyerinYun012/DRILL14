@@ -87,4 +87,17 @@ class BirdFlock:
                 self.direction = 1
 
     def draw(self):
-        pass
+        flip = '' if self.direction > 0 else 'h'
+
+        for (offset_x, offset_y), phase in zip(
+                FORMATION_OFFSETS, FRAME_PHASE_OFFSETS):
+            frame_index = int(self.frame + phase) % FLIGHT_FRAME_COUNT
+            left, bottom, width, height = frame_rectangle(frame_index)
+            bird_x = self.x + self.direction * offset_x
+            bird_y = self.y + offset_y
+
+            self.image.clip_composite_draw(
+                left, bottom, width, height,
+                0, flip,
+                bird_x, bird_y, DRAW_WIDTH, DRAW_HEIGHT
+            )
