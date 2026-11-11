@@ -22,6 +22,16 @@ SPRITE_ROWS = 3
 FLIGHT_FRAME_COUNT = 14
 FLIGHT_FRAMES_PER_SECOND = FLIGHT_FRAME_COUNT * WINGBEATS_PER_SECOND
 
+DRAW_WIDTH = 72
+DRAW_HEIGHT = 66
+
+# Two staggered rows keep all ten birds readable near the top of the canvas.
+FORMATION_OFFSETS = (
+    (-180, 28), (-90, 28), (0, 28), (90, 28), (180, 28),
+    (-225, -42), (-135, -42), (-45, -42), (45, -42), (135, -42),
+)
+FRAME_PHASE_OFFSETS = (0, 3, 6, 9, 12, 2, 5, 8, 11, 13)
+
 
 class BirdFlock:
     """A placeholder flock that is filled out in the following commits."""
@@ -30,6 +40,10 @@ class BirdFlock:
         self.canvas_width = get_canvas_width()
         self.canvas_height = get_canvas_height()
         self.image = load_image('bird_animation.png')
+        self.x = 0.0
+        self.y = self.canvas_height - 100.0
+        self.direction = 1
+        self.frame = 0.0
 
     def update(self):
         pass
