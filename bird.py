@@ -73,6 +73,7 @@ class BirdFlock:
         self.frame = (
             self.frame + FLIGHT_FRAMES_PER_SECOND * elapsed
         ) % FLIGHT_FRAME_COUNT
+        self.x += self.direction * FLY_SPEED_PPS * elapsed
 
     def draw(self):
         pass
